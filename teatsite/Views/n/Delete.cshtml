@@ -1,0 +1,91 @@
+﻿@model teatsite.Models.tNews
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tNews</legend>
+
+
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tSubmenu.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tSubmenu.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tMenu.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tMenu.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.title_more)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.title_more)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.detials)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.detials)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.images)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.images)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.addedtime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.addedtime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.news_count)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.news_count)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.news_video)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.news_video)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.news_audio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.news_audio)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

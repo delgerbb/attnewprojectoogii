@@ -1,0 +1,76 @@
+﻿@model teatsite.Models.tSubmenu
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tSubmenu</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.sub_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.sub_id)
+            @Html.ValidationMessageFor(model => model.sub_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.menus_id, "tMenu")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("menus_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.menus_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.url)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.url)
+            @Html.ValidationMessageFor(model => model.url)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.images)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.images)
+            @Html.ValidationMessageFor(model => model.images)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.addedtime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.addedtime)
+            @Html.ValidationMessageFor(model => model.addedtime)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

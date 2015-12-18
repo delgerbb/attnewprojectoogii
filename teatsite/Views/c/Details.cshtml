@@ -1,0 +1,64 @@
+﻿@model teatsite.Models.tComment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tComment</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.comment_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.comment_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tNews.title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tNews.title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.e_mails)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.e_mails)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.comment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.comment)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.addedcomment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.addedcomment)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.http_posted)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.http_posted)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

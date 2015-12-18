@@ -1,0 +1,84 @@
+﻿@model teatsite.Models.tComment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tComment</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.comment_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.comment_id)
+            @Html.ValidationMessageFor(model => model.comment_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_ids, "tNews")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("news_ids", String.Empty)
+            @Html.ValidationMessageFor(model => model.tNews.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.e_mails)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.e_mails)
+            @Html.ValidationMessageFor(model => model.e_mails)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.comment)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.comment)
+            @Html.ValidationMessageFor(model => model.comment)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.addedcomment)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.addedcomment)
+            @Html.ValidationMessageFor(model => model.addedcomment)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.http_posted)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.http_posted)
+            @Html.ValidationMessageFor(model => model.http_posted)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

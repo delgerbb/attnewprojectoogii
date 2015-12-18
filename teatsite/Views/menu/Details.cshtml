@@ -1,0 +1,50 @@
+﻿@model teatsite.Models.tMenu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tMenu</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.menu_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.menu_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Url)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Url)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.images)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.images)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.addeddate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.addeddate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

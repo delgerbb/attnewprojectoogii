@@ -1,0 +1,13 @@
+﻿@model IEnumerable<teatsite.Models.tMenu>
+
+<li><a href="/">НҮҮР</a></li>
+    @foreach (var item in Model)
+    {
+<li>
+
+        <a href="">@item.name</a>
+        @Html.Action("sublist", "submenu", new {id=item.menu_id })
+</li>
+    }
+
+

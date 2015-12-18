@@ -1,0 +1,116 @@
+﻿@model teatsite.Models.tNews
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tNews</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_id, "tComment")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("news_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.news_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.subs_id, "tSubmenu")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("subs_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.subs_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.menus_ids, "tMenu")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("menus_ids", String.Empty)
+            @Html.ValidationMessageFor(model => model.menus_ids)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title_more)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title_more)
+            @Html.ValidationMessageFor(model => model.title_more)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.detials)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.detials)
+            @Html.ValidationMessageFor(model => model.detials)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.images)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.images)
+            @Html.ValidationMessageFor(model => model.images)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.addedtime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.addedtime)
+            @Html.ValidationMessageFor(model => model.addedtime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_count)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.news_count)
+            @Html.ValidationMessageFor(model => model.news_count)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_video)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.news_video)
+            @Html.ValidationMessageFor(model => model.news_video)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_audio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.news_audio)
+            @Html.ValidationMessageFor(model => model.news_audio)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

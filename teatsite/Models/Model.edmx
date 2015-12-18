@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="att_khovd_drama_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tComment">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="news_ids" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="e-mails" Type="nvarchar" MaxLength="200" />
+          <Property Name="comment" Type="nchar" MaxLength="400" />
+          <Property Name="addedcomment" Type="datetime" />
+          <Property Name="http_posted" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tMenu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+          </Key>
+          <Property Name="menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="images" Type="nvarchar(max)" />
+          <Property Name="addeddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tNews">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subs_id" Type="int" />
+          <Property Name="menus_ids" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="150" />
+          <Property Name="title_more" Type="nvarchar" MaxLength="250" />
+          <Property Name="detials" Type="nvarchar(max)" />
+          <Property Name="images" Type="nvarchar(max)" />
+          <Property Name="addedtime" Type="datetime" />
+          <Property Name="news_count" Type="int" />
+          <Property Name="news_video" Type="nvarchar(max)" />
+          <Property Name="news_audio" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tSubmenu">
+          <Key>
+            <PropertyRef Name="sub_id" />
+          </Key>
+          <Property Name="sub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menus_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="url" Type="nvarchar(max)" />
+          <Property Name="images" Type="nvarchar(max)" />
+          <Property Name="addedtime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_tComment_tNews1">
+          <End Role="tNews" Type="Self.tNews" Multiplicity="0..1" />
+          <End Role="tComment" Type="Self.tComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNews">
+              <PropertyRef Name="news_id" />
+            </Principal>
+            <Dependent Role="tComment">
+              <PropertyRef Name="news_ids" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNews_tMenu">
+          <End Role="tMenu" Type="Self.tMenu" Multiplicity="0..1" />
+          <End Role="tNews" Type="Self.tNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMenu">
+              <PropertyRef Name="menu_id" />
+            </Principal>
+            <Dependent Role="tNews">
+              <PropertyRef Name="menus_ids" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNews_tSubmenu">
+          <End Role="tSubmenu" Type="Self.tSubmenu" Multiplicity="0..1" />
+          <End Role="tNews" Type="Self.tNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSubmenu">
+              <PropertyRef Name="sub_id" />
+            </Principal>
+            <Dependent Role="tNews">
+              <PropertyRef Name="subs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSubmenu_tMenu">
+          <End Role="tMenu" Type="Self.tMenu" Multiplicity="0..1" />
+          <End Role="tSubmenu" Type="Self.tSubmenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMenu">
+              <PropertyRef Name="menu_id" />
+            </Principal>
+            <Dependent Role="tSubmenu">
+              <PropertyRef Name="menus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="att_khovd_drama_dbModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tComment" EntityType="Self.tComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMenu" EntityType="Self.tMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNews" EntityType="Self.tNews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSubmenu" EntityType="Self.tSubmenu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tComment_tNews1" Association="Self.FK_tComment_tNews1">
+            <End Role="tNews" EntitySet="tNews" />
+            <End Role="tComment" EntitySet="tComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNews_tMenu" Association="Self.FK_tNews_tMenu">
+            <End Role="tMenu" EntitySet="tMenu" />
+            <End Role="tNews" EntitySet="tNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNews_tSubmenu" Association="Self.FK_tNews_tSubmenu">
+            <End Role="tSubmenu" EntitySet="tSubmenu" />
+            <End Role="tNews" EntitySet="tNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSubmenu_tMenu" Association="Self.FK_tSubmenu_tMenu">
+            <End Role="tMenu" EntitySet="tMenu" />
+            <End Role="tSubmenu" EntitySet="tSubmenu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="att_khovd_drama_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tComment">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="news_ids" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="e_mails" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="comment" Type="String" MaxLength="400" FixedLength="true" Unicode="true" />
+          <Property Name="addedcomment" Type="DateTime" Precision="3" />
+          <Property Name="http_posted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tNews" Relationship="Self.FK_tComment_tNews1" FromRole="tComment" ToRole="tNews" />
+        </EntityType>
+        <EntityType Name="tMenu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+          </Key>
+          <Property Name="menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="addeddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tNews" Relationship="Self.FK_tNews_tMenu" FromRole="tMenu" ToRole="tNews" />
+          <NavigationProperty Name="tSubmenu" Relationship="Self.FK_tSubmenu_tMenu" FromRole="tMenu" ToRole="tSubmenu" />
+        </EntityType>
+        <EntityType Name="tNews">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subs_id" Type="Int32" />
+          <Property Name="menus_ids" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="title_more" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="detials" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="addedtime" Type="DateTime" Precision="3" />
+          <Property Name="news_count" Type="Int32" />
+          <Property Name="news_video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="news_audio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tComment" Relationship="Self.FK_tComment_tNews1" FromRole="tNews" ToRole="tComment" />
+          <NavigationProperty Name="tMenu" Relationship="Self.FK_tNews_tMenu" FromRole="tNews" ToRole="tMenu" />
+          <NavigationProperty Name="tSubmenu" Relationship="Self.FK_tNews_tSubmenu" FromRole="tNews" ToRole="tSubmenu" />
+        </EntityType>
+        <EntityType Name="tSubmenu">
+          <Key>
+            <PropertyRef Name="sub_id" />
+          </Key>
+          <Property Name="sub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menus_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="addedtime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tMenu" Relationship="Self.FK_tSubmenu_tMenu" FromRole="tSubmenu" ToRole="tMenu" />
+          <NavigationProperty Name="tNews" Relationship="Self.FK_tNews_tSubmenu" FromRole="tSubmenu" ToRole="tNews" />
+        </EntityType>
+        <Association Name="FK_tComment_tNews1">
+          <End Role="tNews" Type="Self.tNews" Multiplicity="0..1" />
+          <End Role="tComment" Type="Self.tComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNews">
+              <PropertyRef Name="news_id" />
+            </Principal>
+            <Dependent Role="tComment">
+              <PropertyRef Name="news_ids" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNews_tMenu">
+          <End Role="tMenu" Type="Self.tMenu" Multiplicity="0..1" />
+          <End Role="tNews" Type="Self.tNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMenu">
+              <PropertyRef Name="menu_id" />
+            </Principal>
+            <Dependent Role="tNews">
+              <PropertyRef Name="menus_ids" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSubmenu_tMenu">
+          <End Role="tMenu" Type="Self.tMenu" Multiplicity="0..1" />
+          <End Role="tSubmenu" Type="Self.tSubmenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMenu">
+              <PropertyRef Name="menu_id" />
+            </Principal>
+            <Dependent Role="tSubmenu">
+              <PropertyRef Name="menus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNews_tSubmenu">
+          <End Role="tSubmenu" Type="Self.tSubmenu" Multiplicity="0..1" />
+          <End Role="tNews" Type="Self.tNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSubmenu">
+              <PropertyRef Name="sub_id" />
+            </Principal>
+            <Dependent Role="tNews">
+              <PropertyRef Name="subs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="att_khovd_drama_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tComment" EntityType="Self.tComment" />
+          <EntitySet Name="tMenu" EntityType="Self.tMenu" />
+          <EntitySet Name="tNews" EntityType="Self.tNews" />
+          <EntitySet Name="tSubmenu" EntityType="Self.tSubmenu" />
+          <AssociationSet Name="FK_tComment_tNews1" Association="Self.FK_tComment_tNews1">
+            <End Role="tNews" EntitySet="tNews" />
+            <End Role="tComment" EntitySet="tComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNews_tMenu" Association="Self.FK_tNews_tMenu">
+            <End Role="tMenu" EntitySet="tMenu" />
+            <End Role="tNews" EntitySet="tNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSubmenu_tMenu" Association="Self.FK_tSubmenu_tMenu">
+            <End Role="tMenu" EntitySet="tMenu" />
+            <End Role="tSubmenu" EntitySet="tSubmenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNews_tSubmenu" Association="Self.FK_tNews_tSubmenu">
+            <End Role="tSubmenu" EntitySet="tSubmenu" />
+            <End Role="tNews" EntitySet="tNews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="att_khovd_drama_dbModelStoreContainer" CdmEntityContainer="att_khovd_drama_dbEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="att_khovd_drama_dbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tComment">
+            <EntityTypeMapping TypeName="att_khovd_drama_dbModel.tComment">
+              <MappingFragment StoreEntitySet="tComment">
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="news_ids" ColumnName="news_ids" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="e_mails" ColumnName="e-mails" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="addedcomment" ColumnName="addedcomment" />
+                <ScalarProperty Name="http_posted" ColumnName="http_posted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMenu">
+            <EntityTypeMapping TypeName="att_khovd_drama_dbModel.tMenu">
+              <MappingFragment StoreEntitySet="tMenu">
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="addeddate" ColumnName="addeddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNews">
+            <EntityTypeMapping TypeName="att_khovd_drama_dbModel.tNews">
+              <MappingFragment StoreEntitySet="tNews">
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
+                <ScalarProperty Name="subs_id" ColumnName="subs_id" />
+                <ScalarProperty Name="menus_ids" ColumnName="menus_ids" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="title_more" ColumnName="title_more" />
+                <ScalarProperty Name="detials" ColumnName="detials" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="addedtime" ColumnName="addedtime" />
+                <ScalarProperty Name="news_count" ColumnName="news_count" />
+                <ScalarProperty Name="news_video" ColumnName="news_video" />
+                <ScalarProperty Name="news_audio" ColumnName="news_audio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSubmenu">
+            <EntityTypeMapping TypeName="att_khovd_drama_dbModel.tSubmenu">
+              <MappingFragment StoreEntitySet="tSubmenu">
+                <ScalarProperty Name="sub_id" ColumnName="sub_id" />
+                <ScalarProperty Name="menus_id" ColumnName="menus_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="addedtime" ColumnName="addedtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
