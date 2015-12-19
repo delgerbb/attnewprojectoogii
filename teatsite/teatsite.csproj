@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -2169,6 +2170,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="news-images\images\05aecc55d539cfd9big.jpg" />
+    <Content Include="news-images\images\cigarettecontents%281%29.jpg" />
+    <Content Include="news-images\images\cigarettecontents.jpg" />
     <Content Include="news-images\images\Thumbs.db" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -3082,6 +3086,7 @@
     <Content Include="Views\c\Create.cshtml" />
     <Content Include="Views\c\Edit.cshtml" />
     <Content Include="Views\c\Delete.cshtml" />
+    <Content Include="Views\Shared\_Layout_reading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

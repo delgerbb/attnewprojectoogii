@@ -3,87 +3,37 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.tSubmenu.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tMenu.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.title_more)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detials)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.images)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.addedtime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.news_count)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.news_video)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.news_audio)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.tSubmenu.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tMenu.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.title_more)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.detials)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.images)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.addedtime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.news_count)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.news_video)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.news_audio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+@{
+    Layout = "~/Views/Shared/_Layout_new.cshtml";
 }
 
-</table>
+
+@foreach (var item in Model) {
+    
+       <div class="clearfix single_content">
+                       
+                        <div class="clearfix post_date floatleft">
+                            <div class="date">
+                                <h3>27</h3>
+                                <p>January</p>
+                                <p>January</p>
+                            </div>
+                        </div>
+                        <div class="clearfix post_detail">
+                            <h2><a href="">@item.title</a></h2>
+                            <div class="clearfix post-meta">
+                                <p><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @item.addedtime</span> <span><i class="fa fa-comment"></i> 4 comments</span> <span><i class="fa fa-folder"></i> @item.tSubmenu.name</span></p>
+                            </div>
+                            <div class="clearfix post_excerpt">
+                                <img src="~/news-images/images/@item.images" alt="" />
+                                <p>
+                                  @Html.Raw(item.title_more)
+                                </p>
+                            </div>
+                            <a href="~/n/details/@item.news_id">Дэлгэрэнгүй</a>
+                        </div>
+                    </div>
+   
+}
+
+

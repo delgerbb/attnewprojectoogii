@@ -12,7 +12,7 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Content/ckfinder/config.js"></script>
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 
 <script language="javascript">
@@ -75,7 +75,7 @@
     <fieldset>
         <legend>tNews</legend>
 
-
+   
         Үндсэн цэс:
         @Html.DropDownList("menus_ids", "------------")
 
@@ -97,20 +97,20 @@
 
 
         @*<div class="editor-label">
-                @Html.LabelFor(model => model.menus_ids, "tMenu")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("menus_ids", String.Empty)
-                @Html.ValidationMessageFor(model => model.menus_ids)
-            </div>
+            @Html.LabelFor(model => model.menus_ids, "tMenu")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("menus_ids", String.Empty)
+            @Html.ValidationMessageFor(model => model.menus_ids)
+        </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.subs_id, "tSubmenu")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("subs_id", String.Empty)
-                @Html.ValidationMessageFor(model => model.subs_id)
-            </div>*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.subs_id, "tSubmenu")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("subs_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.subs_id)
+        </div>*@
 
         <div class="editor-label">
             @Html.LabelFor(model => model.title)

@@ -3,84 +3,25 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
-<fieldset>
-    <legend>tNews</legend>
-
+@{
+    Layout = "~/Views/Shared/_Layout_reading.cshtml";
+}
+<div class="content_title"><h2>@Model.tSubmenu.name</h2></div>
 
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tSubmenu.name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tSubmenu.name)
-    </div>
+<h2>@Model.title</h2>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tMenu.name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tMenu.name)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.title)
-    </div>
+   
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.title_more)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.title_more)
-    </div>
+    
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.detials)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.detials)
-    </div>
+    @Html.Raw(Model.detials)
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.images)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.images)
-    </div>
+@Html.Raw(Model.news_video)
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.addedtime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.addedtime)
-    </div>
+  
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.news_count)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.news_count)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.news_video)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.news_video)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.news_audio)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.news_audio)
-    </div>
-</fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
