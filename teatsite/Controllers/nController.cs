@@ -66,6 +66,36 @@ namespace teatsite.Controllers
             return View(tnews);
         }
 
+        public JsonResult getmenus(int id)
+        {
+            var query = from tsubmenu in db.tSubmenu
+                        select new
+                        {
+                            id = tsubmenu.sub_id,
+                            name = tsubmenu.name,
+                            menus_id = tsubmenu.menus_id,
+
+                        };
+            query = query.Where(i => i.menus_id == id);
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult
+                {
+
+                    Data = query.ToList(),
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "ALDAA",
+                    JsonRequestBehavior = JsonRequestBehavior.DenyGet
+                };
+            }
+        }
+
         //
         // GET: /n/Edit/5
 
