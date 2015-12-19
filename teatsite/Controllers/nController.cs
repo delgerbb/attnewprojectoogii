@@ -6,6 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using teatsite.Models;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Configuration;
+using ImageResizer;
+
 
 namespace teatsite.Controllers
 {
@@ -51,12 +58,77 @@ namespace teatsite.Controllers
         [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(tNews tnews)
+        public ActionResult Create(tNews tnews, HttpPostedFileBase file)
         {
+
+            if (file != null)
+            {
+                //Declare a new dictionary to store the parameters for the image versions.
+                var versions = new Dictionary<string, string>();
+
+                var path = Server.MapPath("~/news-images");
+
+                //Define the versions to generate
+                versions.Add("_small", "maxwidth=600&maxheight=600&format=jpg");
+                versions.Add("_medium", "maxwidth=900&maxheight=900&format=jpg");
+                versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
+
+                //Generate each version
+                foreach (var suffix in versions.Keys)
+                {
+                    file.InputStream.Seek(0, SeekOrigin.Begin);
+
+                    //Let the image builder add the correct extension based on the output file type
+                    ImageBuilder.Current.Build(
+                        new ImageJob(
+                            file.InputStream,
+                            path + file.FileName+suffix,
+                            new Instructions(versions[suffix]),
+                            false,
+                            true));
+                    
+                }
+            }
+
+
             if (ModelState.IsValid)
             {
+                tnews.images = file.FileName; ;
+                tnews.addedtime = DateTime.Now;
                 db.tNews.Add(tnews);
-                db.SaveChanges();
+                int resultOfChanged = db.SaveChanges();
+
+
+                if (file != null)
+                {
+                    //Declare a new dictionary to store the parameters for the image versions.
+                    var versions = new Dictionary<string, string>();
+
+                    var path = Server.MapPath("~/news-images");
+
+                    //Define the versions to generate
+                    versions.Add("_small", "maxwidth=600&maxheight=600&format=jpg");
+                    versions.Add("_medium", "maxwidth=900&maxheight=900&format=jpg");
+                    versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
+
+                    //Generate each version
+                    foreach (var suffix in versions.Keys)
+                    {
+                        file.InputStream.Seek(0, SeekOrigin.Begin);
+
+                        //Let the image builder add the correct extension based on the output file type
+                        ImageBuilder.Current.Build(
+                            new ImageJob(
+                                file.InputStream,
+                                path + file.FileName + suffix,
+                                new Instructions(versions[suffix]),
+                                false,
+                                true));
+
+                    }
+                }
+
+
                 return RedirectToAction("Index");
             }
 
@@ -95,6 +167,9 @@ namespace teatsite.Controllers
                 };
             }
         }
+
+
+
 
         //
         // GET: /n/Edit/5
