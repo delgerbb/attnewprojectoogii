@@ -7,8 +7,13 @@
     Layout = "~/Views/Shared/_Layout_new.cshtml";
 }
 
+  @{ 
+      var med = "_medium.jpg";
+  }
+    
 
 @foreach (var item in Model) {
+
     
        <div class="clearfix single_content">
                        
@@ -25,7 +30,8 @@
                                 <p><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @item.addedtime</span> <span><i class="fa fa-comment"></i> 4 comments</span> <span><i class="fa fa-folder"></i> @item.tSubmenu.name</span></p>
                             </div>
                             <div class="clearfix post_excerpt">
-                                <img src="~/news-images/images/@item.images" alt="" />
+                                <img src="~/news-images/@item.images@med" alt="" />
+                              
                                 <p>
                                   @Html.Raw(item.title_more)
                                 </p>

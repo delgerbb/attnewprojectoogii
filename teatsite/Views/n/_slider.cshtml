@@ -1,0 +1,50 @@
+﻿@model IEnumerable<teatsite.Models.tNews>
+
+@{ 
+    ViewBag.text2 = "_medium.jpg";
+    ViewBag.text3 = "_small.jpg";
+
+    var med = "_medium.jpg";
+    var smal = "_small.jpg";
+
+
+
+}
+
+@foreach (var item in Model)
+{
+
+
+
+    <li><img src="~/news-images/@item.images@smal" alt="@item.tSubmenu.name" data-description="@item.title" data-large-src="/news-images/@item.images@med" /></li>
+    
+    @*<li>
+        <img src="~/news-images/@item.images@med" alt="" />
+        <div class="panel-overlay">
+            <h2><a href="~/news/r1/@item.news_id"> @item.title)</a></h2>
+
+            <p>
+                @if (item.title_more.Length >= 150)
+                {
+                    var shows = item.title_more.Substring(0, 150) + "...";
+                    @Html.Raw(shows)
+                }
+                else
+                {
+                    @Html.Raw(item.title_more)
+                }
+            </p>
+
+        </div>
+    </li>*@
+
+
+      
+           
+      
+
+    
+
+    
+}
+

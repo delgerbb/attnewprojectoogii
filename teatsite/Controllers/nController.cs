@@ -29,6 +29,13 @@ namespace teatsite.Controllers
             return View(tnews.ToList());
         }
 
+        public PartialViewResult slider()
+        {
+            var tnews = db.tNews.Include(t => t.tComment).Include(t => t.tMenu).Include(t => t.tSubmenu);
+            return PartialView("_slider",tnews.ToList().Take(3));
+        }
+
+
         //
         // GET: /n/Details/5
 
@@ -66,11 +73,11 @@ namespace teatsite.Controllers
                 //Declare a new dictionary to store the parameters for the image versions.
                 var versions = new Dictionary<string, string>();
 
-                var path = Server.MapPath("~/news-images");
+                var path = Server.MapPath("~/news-images/");
 
                 //Define the versions to generate
                 versions.Add("_small", "maxwidth=600&maxheight=600&format=jpg");
-                versions.Add("_medium", "maxwidth=900&maxheight=900&format=jpg");
+                versions.Add("_medium", "maxwidth=470&maxheight=940&format=jpg");
                 versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
 
                 //Generate each version
@@ -96,39 +103,7 @@ namespace teatsite.Controllers
                 tnews.images = file.FileName; ;
                 tnews.addedtime = DateTime.Now;
                 db.tNews.Add(tnews);
-                int resultOfChanged = db.SaveChanges();
-
-
-                if (file != null)
-                {
-                    //Declare a new dictionary to store the parameters for the image versions.
-                    var versions = new Dictionary<string, string>();
-
-                    var path = Server.MapPath("~/news-images");
-
-                    //Define the versions to generate
-                    versions.Add("_small", "maxwidth=600&maxheight=600&format=jpg");
-                    versions.Add("_medium", "maxwidth=900&maxheight=900&format=jpg");
-                    versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
-
-                    //Generate each version
-                    foreach (var suffix in versions.Keys)
-                    {
-                        file.InputStream.Seek(0, SeekOrigin.Begin);
-
-                        //Let the image builder add the correct extension based on the output file type
-                        ImageBuilder.Current.Build(
-                            new ImageJob(
-                                file.InputStream,
-                                path + file.FileName + suffix,
-                                new Instructions(versions[suffix]),
-                                false,
-                                true));
-
-                    }
-                }
-
-
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
