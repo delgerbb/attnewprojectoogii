@@ -16,7 +16,7 @@ namespace teatsite.Models
     {
         public tSubmenu()
         {
-            this.tNews = new HashSet<tNews>();
+            this.tNews = new HashSet<tNew>();
         }
     
         public int sub_id { get; set; }
@@ -27,6 +27,6 @@ namespace teatsite.Models
         public Nullable<System.DateTime> addedtime { get; set; }
     
         public virtual tMenu tMenu { get; set; }
-        public virtual ICollection<tNews> tNews { get; set; }
+        public virtual ICollection<tNew> tNews { get; set; }
     }
 }

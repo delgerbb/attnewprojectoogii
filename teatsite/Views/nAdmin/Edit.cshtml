@@ -1,0 +1,150 @@
+﻿@model teatsite.Models.tNews
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout_admin1.cshtml";
+}
+<script src="~/Content/ckfinder/config.js"></script>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Content/ckfinder/config.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<script language="javascript">
+    $(document).ready(function () {
+        $("#menus_ids").change(function () {
+            //alert("sdfsdfsdf");
+            var Ocategory = parseInt($("#menus_ids").val());
+            //alert("sdfsdfsdf     "+schoolID);
+            if (!isNaN(Ocategory)) {
+                //alert("sdfsdfsdf" + Ocategory);
+                var ddCatID = $("#subs_id");
+                //alert("sdfsdfsdf");
+                ddCatID.empty();
+                ddCatID.append($("<option></option>").val("").html("--------"));
+                //alert("Энд ирж байна уу");
+                $.ajax({
+                    url: "@Url.Action("getMenus", "n")",
+                    type: "GET",
+                    data: { id: Ocategory },
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var k = 0;
+                   //alert("Энд ирж байна уу");
+                    $.each(data, function (i, name) {
+                        k++;
+                        //alert(i);
+                        //alert("OK:   " + id + data[id].name+ "      " + name);
+                        ddCatID.append(
+                            $("<option></option>").val(data[i].id).html(data[i].name)
+                            );
+                    });
+                },
+                error: function () {
+                    alert("Error");
+                }
+
+            })
+            }
+        })
+    })
+
+</script>
+
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tNews</legend>
+
+      
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.news_id)
+        </div>
+
+        Үндсэн цэс:
+        @Html.DropDownList("menus_ids", "цэс сонгох...")
+
+        Дэд цэс: @Html.DropDownList("subs_id", Enumerable.Empty<SelectListItem>(), "Дэд цэс сонгох...")
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title_more)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title_more)
+            @Html.ValidationMessageFor(model => model.title_more)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.detials)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.detials ,new { @class = "ckeditor" })
+            @Html.ValidationMessageFor(model => model.detials)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.images)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.images)
+            @Html.ValidationMessageFor(model => model.images)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.addedtime)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.addedtime)
+            @Html.ValidationMessageFor(model => model.addedtime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_count)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.news_count)
+            @Html.ValidationMessageFor(model => model.news_count)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_video)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.news_video)
+            @Html.ValidationMessageFor(model => model.news_video)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.news_audio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.news_audio)
+            @Html.ValidationMessageFor(model => model.news_audio)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

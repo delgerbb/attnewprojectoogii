@@ -1,0 +1,5 @@
+﻿@model IEnumerable<teatsite.Models.tNews>
+@foreach (var item in Model)
+{
+    <li><a href="~/n/post/@item.news_id">@item.title</a></li>
+}

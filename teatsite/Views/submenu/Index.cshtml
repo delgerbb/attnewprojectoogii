@@ -1,63 +1,47 @@
 ﻿@model IEnumerable<teatsite.Models.tSubmenu>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Дэд цэсүүд";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_admin1.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.sub_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tMenu.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.images)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.addedtime)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.sub_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tMenu.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.images)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.addedtime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.sub_id}) |
-            @Html.ActionLink("Details", "Details", new { id=item.sub_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.sub_id })
-        </td>
-    </tr>
-}
-
-</table>
+    <table class="table table-striped table-bordered responsive">
+        <thead>
+            <tr>
+                <th>Үндсэн цэс</th>
+                <th>Дэд цэс</th>
+                <th>Дугаар</th>
+                <th>Статус</th>
+                <th>Удирдлага</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.tMenu.name</td>
+                    <td class="center">@item.name</td>
+                    <td class="center">@item.sub_id</td>
+                    <td class="center">
+                        <span class="label-success label label-default">Нийтэлсэн</span>
+                    </td>
+                    <td class="center">
+                        <a class="btn btn-success" href="/" target="_blank">
+                            <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                            Үзэх
+                        </a>
+                        <a class="btn btn-info" href="~/submenu/edit/@item.sub_id">
+                            <i class="glyphicon glyphicon-edit icon-white"></i>
+                            Засах
+                        </a>
+                        <a class="btn btn-danger" href="~/submenu/delete/@item.sub_id">
+                            <i class="glyphicon glyphicon-trash icon-white"></i>
+                            Устгах
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

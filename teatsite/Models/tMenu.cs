@@ -16,8 +16,8 @@ namespace teatsite.Models
     {
         public tMenu()
         {
-            this.tNews = new HashSet<tNews>();
-            this.tSubmenu = new HashSet<tSubmenu>();
+            this.tNews = new HashSet<tNew>();
+            this.tSubmenus = new HashSet<tSubmenu>();
         }
     
         public int menu_id { get; set; }
@@ -26,7 +26,7 @@ namespace teatsite.Models
         public string images { get; set; }
         public Nullable<System.DateTime> addeddate { get; set; }
     
-        public virtual ICollection<tNews> tNews { get; set; }
-        public virtual ICollection<tSubmenu> tSubmenu { get; set; }
+        public virtual ICollection<tNew> tNews { get; set; }
+        public virtual ICollection<tSubmenu> tSubmenus { get; set; }
     }
 }

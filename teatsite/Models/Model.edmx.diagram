@@ -4,11 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="de41a1d3c8b64a6cbb293d0737502fc3" Name="Diagram1">
-        <EntityTypeShape EntityType="att_khovd_drama_dbModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="2bbb4a5995994f02b47b15d4489a36c9" Name="Diagram1">
         <EntityTypeShape EntityType="att_khovd_drama_dbModel.tComment" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="att_khovd_drama_dbModel.tLink" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="att_khovd_drama_dbModel.tMedia" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="att_khovd_drama_dbModel.tMenu" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="att_khovd_drama_dbModel.tNews" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="att_khovd_drama_dbModel.tNew" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="att_khovd_drama_dbModel.tSubmenu" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
         <AssociationConnector Association="att_khovd_drama_dbModel.FK_tComment_tNews1" ManuallyRouted="false" />
         <AssociationConnector Association="att_khovd_drama_dbModel.FK_tNews_tMenu" ManuallyRouted="false" />

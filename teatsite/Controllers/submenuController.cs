@@ -15,7 +15,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /submenu/
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var tsubmenu = db.tSubmenu.Include(t => t.tMenu);
@@ -26,24 +26,14 @@ namespace teatsite.Controllers
         public PartialViewResult sublist(int? id)
         {
             var tsubmenu = db.tSubmenu.Where(t => t.menus_id==id);
+            tsubmenu=tsubmenu.OrderByDescending(s => s.addedtime);
             return PartialView("_submenulist",tsubmenu.ToList());
         }
         //
-        // GET: /submenu/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            tSubmenu tsubmenu = db.tSubmenu.Find(id);
-            if (tsubmenu == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tsubmenu);
-        }
 
         //
         // GET: /submenu/Create
-
+           [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.menus_id = new SelectList(db.tMenu, "menu_id", "name");
@@ -55,6 +45,7 @@ namespace teatsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public ActionResult Create(tSubmenu tsubmenu)
         {
             if (ModelState.IsValid)
@@ -71,7 +62,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /submenu/Edit/5
-
+           [Authorize(Roles="Admin")]
         public ActionResult Edit(int id = 0)
         {
             tSubmenu tsubmenu = db.tSubmenu.Find(id);
@@ -88,6 +79,7 @@ namespace teatsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public ActionResult Edit(tSubmenu tsubmenu)
         {
             if (ModelState.IsValid)
@@ -102,7 +94,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /submenu/Delete/5
-
+           [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id = 0)
         {
             tSubmenu tsubmenu = db.tSubmenu.Find(id);

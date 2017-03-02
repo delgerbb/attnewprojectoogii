@@ -3,15 +3,17 @@
 @{
     ViewBag.Title = "Edit";
 }
+@{
+    Layout = "~/Views/Shared/_Layout_admin1.cshtml";
+}
 
-<h2>Edit</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>tComment</legend>
+        <legend>Засах</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.comment_id)

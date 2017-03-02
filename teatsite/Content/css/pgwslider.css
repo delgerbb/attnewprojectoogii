@@ -13,13 +13,13 @@
 .pgwSlider .ps-current {
     float: left;
     width: 74%;
-    border-bottom:50px solid #222;
+    border-bottom:50px solid #4C4C4E;
     height: inherit;
     position: relative;
 }
 
 .pgwSlider .ps-current span {
-background: url("../images/slider_arrow2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+/*background: url("../images/slider_arrow2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);*/
 bottom: -55px;
 color: #fff;
 font-size: 1rem;
@@ -34,6 +34,7 @@ width: 100%;
     min-width: 100%;
     height: auto;
     display: block;
+    height:253px
 }
 
 ul.pgwSlider,

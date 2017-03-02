@@ -1,0 +1,52 @@
+﻿@model teatsite.Models.tComment
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<div class="comment-write-box">
+
+
+
+   
+        <div class="comment-notifier">
+            <p style="text-align:justify;"><b>АНХААРУУЛГА:</b> Уншигчдын бичсэн сэтгэгдэлд http://http://www.arkhitamkhigui.kho.gov.mn хариуцлага хүлээхгүй болно. ХХЗХ-ны журмын дагуу зүй зохисгүй зарим үг, хэллэгийг хязгаарласан тул ТА сэтгэгдэл бичихдээ хууль зүйн болон ёс суртахууны хэм хэмжээг хүндэтгэнэ үү.
+        Сэтгэгдэлтэй холбоотой санал гомдлыг 7043102 утсаар хүлээн авна.</p>
+        </div>
+
+    @using (Html.BeginForm("Create", "c", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.news_ids)
+
+        <form>
+            <p>
+                @Html.TextBoxFor(model => model.name, new { @class = "wpcf7-text", placeholder = "Нэр:*" })
+            @Html.ValidationMessageFor(model => model.name)
+        </p>
+        <p style="float:right;">@Html.Action("GetUserIP", "c")</p>
+        <p>
+            @Html.TextAreaFor(model => model.comment, new { @class = "wpcf7-textarea", placeholder = "Сэтгэгдэл*" })
+            <br />
+            @Html.ValidationMessageFor(model => model.comment)
+        </p>
+        <span id="textlength"></span>
+        <script>
+            $(document).ready(function () {
+                $(document).on('keyup', '#comment', function () {
+                    var commentLength = $("#comment").val();
+                    if (commentLength.length >= 380) {
+                        commentLength = commentLength.substring(0, 380);
+                        $("#comment").val(commentLength);
+                    }
+                    $("#textlength").html((380 - commentLength.length) + " бичих боломжтой үсэг үлдсэн байна. ");
+                });
+
+            });
+
+        </script>
+        <p><input type="Submit" class="wpcf7-submit" value="Сэтгэгдэл оруулах" /></p>
+    </form>
+    }
+    </div>

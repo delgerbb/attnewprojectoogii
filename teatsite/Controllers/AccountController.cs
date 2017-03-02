@@ -41,7 +41,7 @@ namespace teatsite.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "Нэр, нууц үг тохирохгүй байна");
             return View(model);
         }
 
@@ -54,7 +54,7 @@ namespace teatsite.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "n");
         }
 
         //
@@ -168,7 +168,7 @@ namespace teatsite.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                        ModelState.AddModelError("", "Шинэ болон хуучин нууц үг тохирохгүй байна та дахин батлгаажуулна уу.");
                     }
                 }
             }

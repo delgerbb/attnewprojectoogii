@@ -25,10 +25,11 @@ namespace teatsite.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public DbSet<tComment> tComment { get; set; }
-        public DbSet<tMenu> tMenu { get; set; }
-        public DbSet<tNews> tNews { get; set; }
-        public DbSet<tSubmenu> tSubmenu { get; set; }
+        public DbSet<tComment> tComments { get; set; }
+        public DbSet<tLink> tLinks { get; set; }
+        public DbSet<tMedia> tMedias { get; set; }
+        public DbSet<tMenu> tMenus { get; set; }
+        public DbSet<tNew> tNews { get; set; }
+        public DbSet<tSubmenu> tSubmenus { get; set; }
     }
 }

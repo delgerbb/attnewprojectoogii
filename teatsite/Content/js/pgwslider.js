@@ -6,21 +6,21 @@
  * 
  * Released under the MIT license - http://opensource.org/licenses/MIT
  */
-;(function($){
-    $.fn.pgwSlider = function(options) {
+; (function ($) {
+    $.fn.pgwSlider = function (options) {
 
         var defaults = {
-            autoSlide : true,
-            adaptiveHeight : false,
-            adaptiveDuration : 400,
-            transitionDuration : 400,
-            intervalDuration : 3000
+            autoSlide: true,
+            adaptiveHeight: false,
+            adaptiveDuration: 400,
+            transitionDuration: 400,
+            intervalDuration: 3000
         };
 
         if (this.length == 0) {
             return this;
-        } else if(this.length > 1) {
-            this.each(function() {
+        } else if (this.length > 1) {
+            this.each(function () {
                 $(this).pgwSlider(options);
             });
             return this;
@@ -36,8 +36,8 @@
         pgwSlider.window = $(window);
 
         // Init
-        var init = function() {
-        
+        var init = function () {
+
             // Merge the user options with the defaults config
             pgwSlider.config = $.extend({}, defaults, options);
 
@@ -48,12 +48,12 @@
             if (pgwSlider.config.autoSlide) {
                 activateInterval();
             }
-            
+
             return true;
         };
 
         // Get element
-        var getElement = function(obj) {
+        var getElement = function (obj) {
             var element = {};
 
             // Get link
@@ -98,32 +98,32 @@
         };
 
         // Update the current height
-        var updateHeight = function(height, animate) {  
+        var updateHeight = function (height, animate) {
 
             // Adjust the height of the right list items
             var elementHeight = ((height - ((pgwSlider.nbElements - 1) * 6)) / pgwSlider.nbElements);
             var elementWidth = (100 / pgwSlider.nbElements);
             pgwSlider.plugin.find('ul li').css({ width: elementWidth + '%' });
-        
+
             // Adjust the height of the main container
             if (typeof animate != 'undefined' && animate) {
                 pgwSlider.plugin.find('.ps-current').animate({
                     height: height
-                }, pgwSlider.config.adaptiveDuration, function() {
+                }, pgwSlider.config.adaptiveDuration, function () {
                     pgwSlider.plugin.find('ul li').animate({ height: elementHeight }, pgwSlider.config.adaptiveDuration);
                 });
-                
+
             } else {
                 pgwSlider.plugin.find('.ps-current').css('height', height);
                 pgwSlider.plugin.find('ul li').css('height', elementHeight);
             }
-            
+
             return true;
         };
 
         // Setup
-        var setup = function() {
-        
+        var setup = function () {
+
             // Create container
             pgwSlider.plugin.wrap('<div class="pgwSlider"></div>');
             pgwSlider.plugin = pgwSlider.plugin.parent();
@@ -133,7 +133,7 @@
 
             // Get slider elements
             var elementId = 0;
-            pgwSlider.plugin.find('ul li').each(function() {
+            pgwSlider.plugin.find('ul li').each(function () {
                 var element = getElement($(this));
                 element.id = elementId;
                 pgwSlider.data.push(element);
@@ -151,32 +151,32 @@
                 }
 
                 // Disable native links in the right list
-                $(this).css('cursor', 'pointer').click(function(event) {
+                $(this).css('cursor', 'pointer').click(function (event) {
                     event.preventDefault();
                     displayCurrent(element.id);
                 });
-                
+
                 elementId++;
             });
 
             // Attach slide events
             if (pgwSlider.config.autoSlide) {
-                pgwSlider.plugin.on('mouseenter', function() {
+                pgwSlider.plugin.on('mouseenter', function () {
                     clearInterval(pgwSlider.eventInterval);
                     pgwSlider.eventInterval = null;
-                }).on('mouseleave', function() {
+                }).on('mouseleave', function () {
                     activateInterval();
                 });
             }
 
             // Display the first element
             displayCurrent(0, true);
-            
+
             return true;
         };
 
         // Display current element
-        var displayCurrent = function(elementId, init) {
+        var displayCurrent = function (elementId, init) {
 
             pgwSlider.currentNb = elementId;
             var element = pgwSlider.data[elementId];
@@ -184,9 +184,9 @@
 
             // Opacify the current element
             elementContainer.animate({
-                opacity : 0,
-            }, pgwSlider.config.transitionDuration, function() {
-            
+                opacity: 0,
+            }, pgwSlider.config.transitionDuration, function () {
+
                 pgwSlider.plugin.find('ul li').css('opacity', '0.6');
                 pgwSlider.plugin.find('ul li.elt_' + elementId).css('opacity', '1');
 
@@ -197,7 +197,7 @@
                     elementContainer.html('<img src="' + element.thumbnail + '" alt="' + (element.title ? element.title : '') + '">');
                 } else {
                     elementContainer.html('');
-                }           
+                }
 
                 // Create caption
                 var elementText = '';
@@ -224,14 +224,14 @@
                 }
 
                 // Set the container height
-                elementContainer.find('img').load(function() {
+                elementContainer.find('img').load(function () {
                     if (typeof pgwSlider.plugin.find('.ps-current').attr('data-checked') == 'undefined') {
-                    
+
                         var maxHeight = pgwSlider.plugin.find('.ps-current img').height();
                         updateHeight(maxHeight);
                         pgwSlider.plugin.find('.ps-current').attr('data-checked', 'true');
-                        
-                        pgwSlider.window.resize(function() {
+
+                        pgwSlider.window.resize(function () {
                             var maxHeight = pgwSlider.plugin.find('.ps-current img').height();
                             updateHeight(maxHeight);
                         });
@@ -244,32 +244,32 @@
 
                 // Display the new element
                 elementContainer.animate({
-                    opacity : 1,
+                    opacity: 1,
                 }, pgwSlider.config.transitionDuration);
             });
-            
+
             return true;
         };
 
         // Activate interval
-        var activateInterval = function() {
-        
+        var activateInterval = function () {
+
             if (pgwSlider.nbElements > 1 && pgwSlider.config.autoSlide) {
-            
-                pgwSlider.eventInterval = setInterval(function() {
+
+                pgwSlider.eventInterval = setInterval(function () {
                     var maxNb = pgwSlider.nbElements - 1;
-                    
+
                     if (pgwSlider.currentNb + 1 <= maxNb) {
                         var nextNb = pgwSlider.currentNb + 1;
                     } else {
                         var nextNb = 0;
                     }
-                    
+
                     displayCurrent(nextNb);
-                    
+
                 }, pgwSlider.config.intervalDuration);
             }
-            
+
             return true;
         };
 

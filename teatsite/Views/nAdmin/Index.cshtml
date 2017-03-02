@@ -1,0 +1,48 @@
+﻿@model IEnumerable<teatsite.Models.tNews>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_admin1.cshtml";
+}
+
+<div class="alert alert-info"><a href="~/nadmin/create">Шинэ мэдээлэл нэмэх</a></div>
+<table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+
+    <thead>
+        <tr>
+            <th>Мэдээ гарчиг</th>
+            <th>нийтэлсэн огноо:</th>
+            <th>дугаар</th>
+            <th>статус</th>
+            <th>Удирдлага</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+              <tr>
+                <td>@item.title</td>
+                <td class="center">@item.addedtime</td>
+                <td class="center">@item.news_id</td>
+                <td class="center">
+                    <span class="label-success label label-default">нийтэлсэн</span>
+                </td>
+                <td class="center">
+                    <a class="btn btn-success" href="~/n/post/@item.news_id" target="_blank">
+                        <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                        Үзэх
+                    </a>
+                    <a class="btn btn-info" href="~/nadmin/edit/@item.news_id">
+                        <i class="glyphicon glyphicon-edit icon-white"></i>
+                        засах
+                    </a>
+                    <a class="btn btn-danger" href="~/nadmin/delete/@item.news_id">
+                        <i class="glyphicon glyphicon-trash icon-white"></i>
+                        устгах
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

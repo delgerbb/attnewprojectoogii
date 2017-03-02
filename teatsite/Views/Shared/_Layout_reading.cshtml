@@ -4,21 +4,30 @@
 
 
 <head>
-    <title>Архигүй, тамхигүй ховдчууд</title>
+    <title>@ViewBag.Title</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="~/Images/logo_nema.png" />
     <!--Oswald Font -->
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
     <link href="~/Content/css/tooltipster.css" rel="stylesheet" />
     <!-- home slider-->
-    <link href="css/pgwslider.css" rel="stylesheet">
+    <link href="css/pgwslider.css" rel="stylesheet" />
     <link href="~/Content/css/pgwslider.css" rel="stylesheet" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/responsive.css" rel="stylesheet" />
+    <link href="~/Content/featured_slide.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.easing.1.3.js"></script>
+    <script src="~/Scripts/jquery.timers.1.2.js"></script>
+    <script src="~/Scripts/jquery.galleryview.2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.galleryview.setup.js"></script>
+   
 </head>
 
 <body>
@@ -27,11 +36,11 @@
         <div class="wrapper header">
             <div class="clearfix header_top">
                 <div class="clearfix logo floatleft">
-                    <a href=""><h1><span>Архигүй, Тамхигүй</span> Ховдчууд</h1></a>
+                    @*<a href=""><h1><span>Архигүй, Тамхигүй</span> Ховдчууд</h1></a>*@
                 </div>
                 <div class="clearfix search floatright">
-                    <form>
-                        <input type="text" placeholder="Хайх" />
+                    <form action="~/n/s" method="get">
+                        <input type="text" name="Searching" placeholder="Хайх" />
                         <input type="submit" />
                     </form>
                 </div>
@@ -39,15 +48,13 @@
             <div class="header_bottom">
                 <nav>
                     <ul id="nav">
-                       
+
                         @Html.Action("menu_list", "menu")
 
-
-                        
                     </ul>
                 </nav>
-                      
-              
+
+
             </div>
         </div>
     </section>
@@ -57,84 +64,55 @@
 
             <div class="clearfix main_content floatleft">
 
-                @*<div class="clearfix slider">
-                    <ul class="pgwSlider">
-                        <li><img src="~/images/thumbs/megamind_07.jpg" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars" data-large-src="../../images/slides/megamind_07.jpg" /></li>
-                        <li><img src="~/images/thumbs/wall-e.jpg" alt="Montréal, QC, Canada" data-large-src="../../images/slides/wall-e.jpg" data-description="Eiffel Tower and Champ de Mars" /></li>
-                        <li>
-                            <img src="~/images/thumbs/up-official-trailer-fake.jpg" alt="Shanghai, China" data-large-src="../../images/slides/up-official-trailer-fake.jpg" data-description="Shanghai ,chaina">
-                        </li>
-                       
+               
 
-                    </ul>
-                </div>*@
+
+
+
+
+
 
                 <div class="clearfix content">
+
                    
-                
-               
-                    @RenderBody()
-          
 
-             
+
+                        @RenderBody()
+
+
+
+                 
                 </div>
 
-                <div class="pagination">
-                    <nav>
-                        <ul>
-                            <li><a href=""> << </a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">4</a></li>
-                            <li><a href=""> >> </a></li>
-                        </ul>
-                    </nav>
-                </div>
+
             </div>
             <div class="clearfix sidebar_container floatright">
 
-                <div class="clearfix newsletter">
+                @*<div class="clearfix newsletter">
                     <form>
                         <h2>Signup for newsletter</h2>
                         <input type="text" placeholder="Name" id="mce-TEXT" />
                         <input type="email" placeholder="Name" id="mce-EMAIL" />
                         <input type="submit" value="Submit" id="mc-embedded-subscribe" />
                     </form>
-                </div>
+                </div>*@
                 <div class="clearfix sidebar">
                     <div class="clearfix single_sidebar">
                         <div class="popular_post">
                             <div class="sidebar_title"><h2>Сүүлд нэмэгдсэн мэдээ</h2></div>
                             <ul>
-                                <li><a href="">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. </a></li>
-                                <li><a href="">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. </a></li>
-                                <li><a href="">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. </a></li>
-                                <li><a href="">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. </a></li>
-                                <li><a href="">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. </a></li>
+                                @Html.Action("lastnews", "n")
+
                             </ul>
                         </div>
                     </div>
-                    <div class="clearfix single_sidebar category_items">
-                        <h2>Categories</h2>
-                        <ul>
-                            <li class="cat-item"><a href="">Category Name</a>(12)</li>
-                            <li class="cat-item"><a href="">Category Name </a>(12)</li>
-                            <li class="cat-item"><a href="">Category Name</a>(12)</li>
-                            <li class="cat-item"><a href="">Category Name </a>(12)</li>
-                            <li class="cat-item"><a href="">Category Name </a>(12)</li>
-                        </ul>
-                    </div>
                     <div class="clearfix single_sidebar">
-                        <h2>Recent Post</h2>
-                        <ul>
-                            <li><a href="">Category Name <span>(12)</span></a></li>
-                            <li><a href="">Category Name <span>(12)</span></a></li>
-                            <li><a href="">Category Name <span>(12)</span></a></li>
-                            <li><a href="">Category Name <span>(12)</span></a></li>
-                            <li><a href="">Category Name <span>(12)</span></a></li>
-                        </ul>
+                        @Html.Action("newscount", "n")
                     </div>
+                    <div class="clearfix single_sidebar category_items">
+                        @Html.Action("mList", "menu")
+                    </div>
+                 
                 </div>
             </div>
         </div>
@@ -144,23 +122,16 @@
         <div class="clearfix wrapper footer_top">
             <div class="clearfix footer_top_container">
                 <div class="clearfix single_footer_top floatleft">
-                    <h2>From Twitter</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="">Lorem Ipsum has been the industry</a> standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
+                    <h2>Цаг агаарын 5 хоногийн мэдээ</h2>
+                    <iframe id="forecast_embed" type="text/html" frameborder="0" height="300" width="320" src="http://tsag-agaar.gov.mn/embed/?name=277&color=ef6e25&color2=cc530e&color3=ffffff&color4=ffffff&type=horizontal&tdegree=c&width=100%"> </iframe>
+                  </div>
                 <div class="clearfix single_footer_top floatleft">
-                    <h2>Recent Post</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy <a href="">Lorem Ipsum has been the industry</a> text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
+                    <h2>Facebook хуудас</h2>
+                    <p><div class="fb-like-box" data-href="https://www.facebook.com/%D0%93%D0%BE%D0%B2%D1%8C-%D0%90%D0%BB%D1%82%D0%B0%D0%B9-%D0%9E%D0%BD%D1%86%D0%B3%D0%BE%D0%B9-%D0%91%D0%B0%D0%B9%D0%B4%D0%BB%D1%8B%D0%BD-%D0%93%D0%B0%D0%B7%D0%B0%D1%80-1055180371233806/" data-width="325" data-height="300" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true"></div></p>
+              </div>
                 <div class="clearfix single_footer_top floatleft">
-                    <h2>Usefull Links</h2>
-                    <ul>
-                        <li><a href="">Important links of this site</a></li>
-                        <li><a href="">Important links of this site</a></li>
-                        <li><a href="">Important links of this site</a></li>
-                        <li><a href="">Important links of this site</a></li>
-                        <li><a href="">Important links of this site</a></li>
-                        <li><a href="">Important links of this site</a></li>
-                    </ul>
+                    @*hul hesgiin xolboos duudaj baigaa xeseg*@
+                 
                 </div>
             </div>
         </div>
@@ -169,7 +140,7 @@
     <section id="footer_bottom_area">
         <div class="clearfix wrapper footer_bottom">
             <div class="clearfix copyright floatleft">
-                <p> Copyright &copy; All rights reserved by <span>Wpfreeware.com</span></p>
+                <p> Говь-Алтай аймаг. © 2017 он. Copyright &copy; Онцгой байдлын газар @*<span>Wpfreeware.com</span>*@</p>
             </div>
             <div class="clearfix social floatright">
                 <ul>
@@ -193,7 +164,7 @@
             $('.tooltip').tooltipster();
         });
     </script>
-   <script src="~/Content/js/selectnav.min.js"></script>
+    <script src="~/Content/js/selectnav.min.js"></script>
     <script type="text/javascript">
         selectnav('nav', {
             label: '-Navigation-',
@@ -201,7 +172,7 @@
             indent: '-'
         });
     </script>
-   <script src="~/Content/js/pgwslider.js"></script>
+    <script src="~/Content/js/pgwslider.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.pgwSlider').pgwSlider({
@@ -211,7 +182,16 @@
             });
         });
     </script>
-   <script src="~/Content/js/placeholder_support_IE.js"></script>
+    <div id="fb-root"></div>
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <script src="~/Content/js/placeholder_support_IE.js"></script>
 
 
 

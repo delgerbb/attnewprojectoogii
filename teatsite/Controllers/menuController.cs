@@ -15,11 +15,18 @@ namespace teatsite.Controllers
 
         //
         // GET: /menu/
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.tMenu.ToList());
         }
+
+
+        public PartialViewResult mList()
+        {
+            return PartialView("_menu_list",db.tMenu.ToList());
+        }
+    
 
         public PartialViewResult menu_list()
         {
@@ -42,7 +49,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /menu/Create
-
+         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -68,7 +75,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /menu/Edit/5
-
+         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id = 0)
         {
             tMenu tmenu = db.tMenu.Find(id);
@@ -97,7 +104,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /menu/Delete/5
-
+         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id = 0)
         {
             tMenu tmenu = db.tMenu.Find(id);

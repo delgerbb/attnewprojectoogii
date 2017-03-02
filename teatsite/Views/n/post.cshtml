@@ -1,0 +1,31 @@
+﻿@model teatsite.Models.tNews
+
+@{
+    ViewBag.Title = Model.title;
+}
+@{
+    Layout = "~/Views/Shared/_Layout_reading.cshtml";
+}
+<div class="content_title"><h2>@Model.tMenu.name>>@Model.tSubmenu.name</h2></div>
+
+<div class="clearfix post_detail">
+  
+        <h2>@Model.title</h2>
+
+
+        @Html.Raw(Model.detials)
+
+        <p style="text-align:center"> @Html.Raw(Model.news_video)</p>
+    </br>
+    <h3 style="color:blue; text-align:center;">Манай сайт танд таалагдаж байвал LIKE дараарай. Танд баярлалаа.</h3>
+    <div class="fb-like" data-href="https://www.facebook.com/arhgui.tamhigui.Khovdchuud" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-show-border="true"></div>
+    
+</div>
+
+<div>@Html.Action("commread", "c")</div>
+
+@Html.Action("comm", "c", new { id = Model.news_id })
+<p>
+   
+    @Html.ActionLink(" Нүүр хуудасруу буцах", "Index")
+</p>

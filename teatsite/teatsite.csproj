@@ -44,10 +44,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>E:\install\tv_web\tv_web\bin\CKFinder.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer">
+    <Reference Include="ImageResizer, Version=3.4.3.103, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Documents\Visual Studio 2013\Projects\teatsite\teatsite\bin\ImageResizer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\install\tv_web\tv_web\bin\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\install\tv_web\tv_web\bin\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -194,7 +203,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\cController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\linkController.cs" />
     <Compile Include="Controllers\menuController.cs" />
+    <Compile Include="Controllers\nAdminController.cs" />
     <Compile Include="Controllers\nController.cs" />
     <Compile Include="Controllers\submenuController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -217,16 +228,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\tComment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tComment.cs">
+    <Compile Include="Models\tLink.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tMedia.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tNews.cs">
+    <Compile Include="Models\tNew.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tSubmenu.cs">
@@ -1162,6 +1176,7 @@
     <Content Include="Content\js\pgwslider.js" />
     <Content Include="Content\js\placeholder_support_IE.js" />
     <Content Include="Content\js\selectnav.min.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -1220,6 +1235,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\bg_patter_03.png" />
     <Content Include="Images\head.jpg" />
     <Content Include="Images\head_bg.jpg" />
     <Content Include="Images\body_top_bg.png" />
@@ -1227,6 +1243,7 @@
     <Content Include="Images\header_bg.png" />
     <Content Include="Images\home-copy.jpg" />
     <Content Include="Images\latest_post_bg.png" />
+    <Content Include="Images\logo_nema.png" />
     <Content Include="Images\menu_item.png" />
     <Content Include="Images\nav_right.png" />
     <Content Include="Images\next.gif" />
@@ -2201,6 +2218,22 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Images\slides\.DS_Store" />
     <Content Include="Images\thumbs\.DS_Store" />
+    <Content Include="Content\ckeditor\CHANGES.md" />
+    <Content Include="Content\ckeditor\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Content\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Content\ckeditor\README.md" />
+    <Content Include="Content\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="Content\ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
+    <Content Include="Content\ckfinder\userfiles\.htaccess" />
+    <Content Include="Images\slides\Thumbs.db" />
+    <Content Include="Images\Thumbs.db" />
+    <Content Include="Images\thumbs\Thumbs.db" />
     <Content Include="item2\bower_components\bootstrap-tour\.bower.json" />
     <Content Include="item2\bower_components\bootstrap-tour\.gitignore" />
     <Content Include="item2\bower_components\bootstrap-tour\.travis.yml" />
@@ -2407,19 +2440,6 @@
     <Content Include="item2\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="item2\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="item2\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\ckeditor\CHANGES.md" />
-    <Content Include="Content\ckeditor\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\scayt\README.md" />
-    <Content Include="Content\ckeditor\plugins\wsc\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\wsc\README.md" />
-    <Content Include="Content\ckeditor\README.md" />
-    <Content Include="Content\ckeditor\samples\assets\posteddata.php" />
-    <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
-    <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
-    <Content Include="Content\ckeditor\skins\moono\readme.md" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
-    <Content Include="Content\ckfinder\userfiles\.htaccess" />
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -2427,9 +2447,6 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Images\slides\Thumbs.db" />
-    <Content Include="Images\Thumbs.db" />
-    <Content Include="Images\thumbs\Thumbs.db" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
@@ -3036,7 +3053,6 @@
     <Content Include="news-images\_thumbs\Images\trading_book_reading-300x225.jpg" />
     <Content Include="news-images\_thumbs\Images\_1-638.jpg" />
     <Content Include="news-images\_thumbs\Images\___.jpg" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -3097,25 +3113,19 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\_Layout_new.cshtml" />
     <Content Include="Views\menu\Index.cshtml" />
     <Content Include="Views\menu\Details.cshtml" />
     <Content Include="Views\menu\Create.cshtml" />
     <Content Include="Views\menu\Edit.cshtml" />
     <Content Include="Views\menu\Delete.cshtml" />
     <Content Include="Views\submenu\Index.cshtml" />
-    <Content Include="Views\submenu\Details.cshtml" />
     <Content Include="Views\submenu\Create.cshtml" />
     <Content Include="Views\submenu\Edit.cshtml" />
     <Content Include="Views\submenu\Delete.cshtml" />
     <Content Include="Views\n\Index.cshtml" />
-    <Content Include="Views\n\Details.cshtml" />
-    <Content Include="Views\n\Create.cshtml" />
-    <Content Include="Views\n\Edit.cshtml" />
-    <Content Include="Views\n\Delete.cshtml" />
+    <Content Include="Views\n\post.cshtml" />
     <Content Include="Views\menu\_listmenu.cshtml" />
     <Content Include="Views\submenu\_submenulist.cshtml" />
-    <Content Include="Views\Shared\_Layout_item2.cshtml" />
     <Content Include="Views\c\Index.cshtml" />
     <Content Include="Views\c\Details.cshtml" />
     <Content Include="Views\c\Create.cshtml" />
@@ -3123,9 +3133,42 @@
     <Content Include="Views\c\Delete.cshtml" />
     <Content Include="Views\Shared\_Layout_reading.cshtml" />
     <Content Include="Views\n\_slider.cshtml" />
+    <Content Include="Views\n\_lastnews.cshtml" />
+    <Content Include="Views\n\c.cshtml" />
+    <Content Include="Views\n\m.cshtml" />
+    <Content Include="Views\Shared\_Layout_new.cshtml" />
+    <Content Include="Views\Shared\_Layout_item2.cshtml" />
+    <Content Include="Views\c\_ip.cshtml" />
+    <Content Include="Views\c\_test.cshtml" />
+    <Content Include="Views\n\_readcount.cshtml" />
+    <Content Include="Views\link\Index.cshtml" />
+    <Content Include="Views\link\Details.cshtml" />
+    <Content Include="Views\link\Create.cshtml" />
+    <Content Include="Views\link\Edit.cshtml" />
+    <Content Include="Views\link\Delete.cshtml" />
+    <Content Include="Views\Shared\_Layout_admin.cshtml" />
+    <Content Include="Views\nAdmin\Index.cshtml" />
+    <Content Include="Views\nAdmin\Create.cshtml" />
+    <Content Include="Views\nAdmin\Edit.cshtml" />
+    <Content Include="Views\nAdmin\Delete.cshtml" />
+    <Content Include="Views\Shared\_Layout_admin1.cshtml" />
+    <Content Include="Views\n\s.cshtml" />
+    <Content Include="Views\n\_count.cshtml" />
+    <Content Include="Views\menu\_menu_list.cshtml" />
+    <Content Include="Views\n\_total.cshtml" />
+    <Content Include="Views\c\_comm.cshtml" />
+    <Content Include="Views\c\_commread.cshtml" />
+    <Content Include="Views\banner\Index.cshtml" />
+    <Content Include="Views\banner\Create.cshtml" />
+    <Content Include="Views\link\_links.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="asset\bower_components\" />
+    <Folder Include="asset\css\" />
+    <Folder Include="asset\fonts\" />
+    <Folder Include="asset\img\" />
+    <Folder Include="asset\js\" />
     <Folder Include="Images\galleryviewthemes\" />
   </ItemGroup>
   <ItemGroup>

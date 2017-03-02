@@ -1,0 +1,12 @@
+﻿@model IEnumerable<teatsite.Models.tMenu>
+
+<div class="sidebar_title"><h2>Үндсэн цэс</h2></div>
+<ul>
+    @foreach (var item in Model)
+    {
+
+        <li class="cat-item"><a href="~/n/m/@item.menu_id">@item.name</a>@Html.Action("counter", "n", new { id = item.menu_id })</li>
+   
+    }
+</ul>
+

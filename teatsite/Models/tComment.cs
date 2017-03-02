@@ -22,6 +22,6 @@ namespace teatsite.Models
         public Nullable<System.DateTime> addedcomment { get; set; }
         public string http_posted { get; set; }
     
-        public virtual tNews tNews { get; set; }
+        public virtual tNew tNew { get; set; }
     }
 }

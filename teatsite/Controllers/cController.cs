@@ -12,10 +12,9 @@ namespace teatsite.Controllers
     public class cController : Controller
     {
         private att_khovd_drama_dbEntities db = new att_khovd_drama_dbEntities();
-
         //
         // GET: /c/
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var tcomment = db.tComment.Include(t => t.tNews);
@@ -37,7 +36,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /c/Create
-
+          [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.news_ids = new SelectList(db.tNews, "news_id", "title");
@@ -46,25 +45,28 @@ namespace teatsite.Controllers
 
         //
         // POST: /c/Create
-
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(tComment tcomment)
+        public ActionResult Create(tComment tcomment, int? id)
         {
             if (ModelState.IsValid)
             {
+                string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? Request.ServerVariables["REMOTE_ADDR"];
+                tcomment.http_posted = ip;
+                tcomment.addedcomment = DateTime.Now;
                 db.tComment.Add(tcomment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("post", "n", new { id = tcomment.news_ids });
             }
 
-            ViewBag.news_ids = new SelectList(db.tNews, "news_id", "title", tcomment.news_ids);
+            ViewBag.news_ids = new SelectList(db.tNews, "news_id", "title", tcomment.news_ids==id);
             return View(tcomment);
         }
 
         //
         // GET: /c/Edit/5
-
+          [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id = 0)
         {
             tComment tcomment = db.tComment.Find(id);
@@ -93,9 +95,11 @@ namespace teatsite.Controllers
             return View(tcomment);
         }
 
+
+           [Authorize(Roles = "Admin")]
         //
         // GET: /c/Delete/5
-
+        [Authorize(Roles="Admin")]
         public ActionResult Delete(int id = 0)
         {
             tComment tcomment = db.tComment.Find(id);
@@ -118,6 +122,47 @@ namespace teatsite.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public PartialViewResult commread(int? id)
+        {
+            var tcomment = db.tComment.Where(t => t.news_ids == id);
+            tcomment=tcomment.OrderByDescending(t => t.addedcomment);
+            return PartialView("_commread", tcomment.ToList().Take(20));
+        }
+
+
+        public PartialViewResult comm(int id)
+        {
+
+
+
+
+            tComment c = new tComment();
+            c.news_ids = id;
+
+            //db.tComment.Add(tcomment);
+            //db.SaveChanges();
+            //}
+            return PartialView("_comm", c);
+            // return View(quess.ToPagedList(pageNumber, pageSize));
+        }
+
+        public PartialViewResult cCnt(int id)
+        {
+            string tt = db.tComment.Where(i => i.news_ids == id).Count().ToString();
+            return PartialView("_test", tt);
+        }
+
+        public PartialViewResult GetUserIP()
+        {
+            string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? Request.ServerVariables["REMOTE_ADDR"];
+
+            return PartialView("_ip", ip);
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

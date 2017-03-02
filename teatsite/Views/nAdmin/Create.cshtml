@@ -1,0 +1,174 @@
+﻿@model teatsite.Models.tNews
+
+@{
+    ViewBag.Title = "Мэдээлэл оруулах";
+    Layout = "~/Views/Shared/_Layout_admin1.cshtml";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Content/ckfinder/config.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+    <script language="javascript">
+        $(document).ready(function () {
+            $("#menus_ids").change(function () {
+                //alert("sdfsdfsdf");
+                var Ocategory = parseInt($("#menus_ids").val());
+                //alert("sdfsdfsdf     "+schoolID);
+                if (!isNaN(Ocategory)) {
+                    //alert("sdfsdfsdf" + Ocategory);
+                    var ddCatID = $("#subs_id");
+                    //alert("sdfsdfsdf");
+                    ddCatID.empty();
+                    ddCatID.append($("<option></option>").val("").html("--------"));
+                    //alert("Энд ирж байна уу");
+                    $.ajax({
+                        url: "@Url.Action("getMenus", "n")",
+                        type: "GET",
+                        data: { id: Ocategory },
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            var k = 0;
+                            //alert("Энд ирж байна уу");
+                            $.each(data, function (i, name) {
+                                k++;
+                                //alert(i);
+                                //alert("OK:   " + id + data[id].name+ "      " + name);
+                                ddCatID.append(
+                                    $("<option></option>").val(data[i].id).html(data[i].name)
+                                    );
+                            });
+                        },
+                        error: function () {
+                            alert("Error");
+                        }
+
+                    })
+                }
+            })
+        })
+
+    </script>
+
+
+    @using (Html.BeginForm("create", "n", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Мэдээлэл бэлтгэж оруулах хэсэг</legend>
+
+
+
+            Үндсэн цэс:
+            @Html.DropDownList("menus_ids", "------------")
+
+            @*@Html.DropDownList("dropdownCountry", new SelectList(string.Empty, "Value", "Text"), "Please select a country", new { @style = "width:250px;" })*@
+
+
+
+
+            Дэд цэс: @Html.DropDownList("subs_id", Enumerable.Empty<SelectListItem>(), "------")
+            @*@Html.DropDownList("dropdownState", new SelectList(string.Empty, "Value", "Text"), "Please select a state", new { @style = "width:250px;" })*@
+
+
+
+
+
+
+
+
+
+
+            <div class="editor-label">
+                <h3>Мэдээний гарчиг</h3>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.title, new { style = "width: 500px;" })
+                @Html.ValidationMessageFor(model => model.title)
+                <br />
+                <span id="textlength1"></span>
+                <script>
+                    $(document).ready(function () {
+                        $(document).on('keyup', '#title', function () {
+                            var commentLength = $("#title").val();
+                            if (commentLength.length >= 150) {
+                                commentLength = commentLength.substring(0, 150);
+                                $("#title").val(commentLength);
+                            }
+                            $("#textlength1").html((150 - commentLength.length) + " бичих боломжтой үсэг үлдсэн байна. ");
+                        });
+
+                    });
+
+                </script>
+            </div>
+
+
+            <div class="editor-label">
+                <h3>Мэдээний товч утга</h3>
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.title_more, new { cols = "72", rows = "5", Value = "123" })
+                @Html.ValidationMessageFor(model => model.title_more)
+                <br />
+                <span id="textlength"></span>
+                <script>
+                    $(document).ready(function () {
+                        $(document).on('keyup', '#title_more', function () {
+                            var commentLength = $("#title_more").val();
+                            if (commentLength.length >= 250) {
+                                commentLength = commentLength.substring(0, 250);
+                                $("#title_more").val(commentLength);
+                            }
+                            $("#textlength").html((250 - commentLength.length) + " бичих боломжтой үсэг үлдсэн байна. ");
+                        });
+
+                    });
+
+                </script>
+            </div>
+
+
+            <div class="editor-label">
+                <h3>Мэдээний дэлгэрэнгүй</h3>
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.detials, new { @class = "ckeditor" })
+                @Html.ValidationMessageFor(model => model.detials)
+            </div>
+
+            <label for="file">Зураг оруулах:</label>
+            <input type="file" name="file" id="file" style="width: 100%;" />
+
+
+
+            <div class="editor-label">
+                <h3>Мэдээний бичлэг</h3>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.news_video)
+                @Html.ValidationMessageFor(model => model.news_video)
+            </div>
+
+            <div class="editor-label">
+                <h3>Мэдээний бичлэг 2</h3>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.news_audio)
+                @Html.ValidationMessageFor(model => model.news_audio)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

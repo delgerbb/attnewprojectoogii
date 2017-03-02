@@ -1,0 +1,10 @@
+﻿@model IEnumerable<teatsite.Models.tComment>
+@foreach (var item in Model)
+{
+    <div class="more_post_container">
+        <h2><i class="fa fa-user fa-3x" style="color:#3BA3FE;"></i> @item.name</h2>
+        <div class="more_post">
+            <p style="text-align:justify;">@item.comment</p>
+        </div>
+    </div>
+}

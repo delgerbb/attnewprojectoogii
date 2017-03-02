@@ -1,0 +1,29 @@
+﻿@model IEnumerable<teatsite.Models.tNews>
+
+<div class="sidebar_title"><h2>Их уншигдсан мэдээлэл</h2></div>
+<ul>
+    @foreach (var item in Model)
+    {
+
+
+
+        <li><a href="~/n/post/@item.news_id" title="@item.title">
+            
+                @if (item.title.Length >= 32)
+                {
+                    var shows = item.title.Substring(0, 32) + "...";
+                    @Html.Raw(shows)
+                }
+                else
+                {
+                    @Html.Raw(item.title)
+                }
+            
+            
+          <span>@item.news_count</span></a></li>
+      
+
+    }
+
+</ul>
+
