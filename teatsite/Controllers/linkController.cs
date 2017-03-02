@@ -55,8 +55,9 @@ namespace teatsite.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+    
         public ActionResult Create(tLink tlinks)
         {
             if (ModelState.IsValid)
@@ -72,7 +73,7 @@ namespace teatsite.Controllers
 
         //
         // GET: /link/Edit/5
-
+        [ValidateInput(false)]
         public ActionResult Edit(int id = 0)
         {
             tLinks tlinks = db.tLinks.Find(id);
@@ -88,6 +89,7 @@ namespace teatsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(tLink tlinks)
         {
             if (ModelState.IsValid)
