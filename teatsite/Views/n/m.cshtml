@@ -1,0 +1,64 @@
+﻿@model PagedList.IPagedList<teatsite.Models.tNews>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_reading.cshtml";
+}
+
+@{
+    var med = "_medium.jpg";
+}
+<div class="content_title"><h2>Сүүлийн үеийн мэдээ</h2></div>
+<div class="clearfix single_work_container">
+    @foreach (var item in Model)
+    {
+        ViewBag.Title = item.tMenu.name;
+
+        <div class="clearfix single_work">
+            <a href="~/n/post/@item.news_id"><img class="img_top" src="~/news-images/@item.images@med" alt="" /></a>
+            <a href="~/n/post/@item.news_id"><img class="img_bottom" src="~/images/work_bg2.png" alt="" /></a>
+            <h2>@item.tSubmenu.name</h2>
+            <a href="~/n/post/@item.news_id">
+                <p class="caption">
+                    @item.title
+                </p>
+            </a>
+        </div>
+        
+        @*<div class="clearfix single_content">
+
+                <div class="clearfix post_date floatleft">
+                    <div class="date">
+                        <h3>27</h3>
+                        <p>January</p>
+                        <p>January</p>
+                    </div>
+                </div>
+                <div class="clearfix post_detail">
+                    <h2><a href="">@item.title</a></h2>
+                    <div class="clearfix post-meta">
+                        <p><span><i class="fa fa-user"></i>  Үзсэн:@item.news_count</span> <span><i class="fa fa-clock-o"></i> @item.addedtime</span> <span><i class="fa fa-comment"></i> 4 comments</span> <span><i class="fa fa-folder"></i> @item.tSubmenu.name</span></p>
+                    </div>
+                    <div class="clearfix post_excerpt">
+                        <img src="~/news-images/@item.images@med" alt="" />
+
+                        <p style="text-align:justify;">
+                          @Html.Raw(item.title_more)
+                        </p>
+                    </div>
+                    <a href="~/n/details/@item.news_id">Дэлгэрэнгүй</a>
+                </div>
+            </div>*@
+    }
+</div>
+<div style="margin-top:45px; margin-left:15px; text-align:center;">
+    Хуудас @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) <<>> @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("m",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+

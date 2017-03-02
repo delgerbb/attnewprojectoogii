@@ -13,13 +13,7 @@
     <fieldset>
         <legend>tNews</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.news_id, "tComment")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("news_id", String.Empty)
-            @Html.ValidationMessageFor(model => model.news_id)
-        </div>
+       
 
         <div class="editor-label">
             @Html.LabelFor(model => model.subs_id, "tSubmenu")
