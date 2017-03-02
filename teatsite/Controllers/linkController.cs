@@ -52,9 +52,11 @@ namespace teatsite.Controllers
 
         //
         // POST: /link/Create
-        [ValidateInput(false)]
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(tLink tlinks)
         {
             if (ModelState.IsValid)
